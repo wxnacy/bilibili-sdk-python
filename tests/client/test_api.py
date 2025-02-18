@@ -14,7 +14,7 @@ pytest_plugins = ('pytest_asyncio',)
 
 api_client = get_api_client()
 
-@pytest.mark.asyncio(scope="module")
+@pytest.mark.asyncio(loop_scope="module")
 async def test_get_web_inferface_nav():
     info = get_cookies_info()
     res = await api_client.get_web_inferface_nav()
@@ -30,3 +30,13 @@ async def test_get_web_inferface_nav():
     sub = sub.rsplit('/', 1)[-1].split('.')[0]
     res = await api_client.get_acc_info(data.mid, img, sub)
     assert res.is_success
+
+@pytest.mark.asyncio(loop_scope="module")
+async def test_get_online():
+    info = get_cookies_info()
+    res = await api_client.get_online(1313229659, aid = 365244281)
+    assert res.is_success
+
+    data = res.data
+    assert data.total == "1"
+    assert data.count == "1"

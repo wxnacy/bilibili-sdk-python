@@ -20,8 +20,11 @@ class ApiClient(BaseClient):
     #  def set_wbi_sub(self, sub: str) -> Self:
         #  self.wbi_sub = sub
         #  return self
+    @classmethod
+    def default(cls) -> Self:
+        return ApiClient(host=settings.HOST_API)
 
-    async def get_online(self, cid: int, *, aid: int = 0, bvid: str = ''):
+    async def get_online(self, cid: int, *, aid: int = 0, bvid: str = '') -> dto.GetOnlineRes:
         if not aid and not bvid:
             raise ValueError("aid or bvid 需要有一个有值")
         params = {"cid": cid}
@@ -29,9 +32,11 @@ class ApiClient(BaseClient):
             params['bvid'] = bvid
         if aid:
             params['aid'] = aid
-        res = self.get("/x/player/online/total", params=params)
-        print(res)
-        return res
+        return await self.get(
+            "/x/player/online/total",
+            params=params,
+            res_clz=dto.GetOnlineRes,
+        )
 
     async def get_acc_info(self, mid: int, wbi_img: str, wbi_sub: str) -> Optional[dto.GetAccInfoRes]:
         '''用户空间详细信息
@@ -56,4 +61,4 @@ class ApiClient(BaseClient):
 
 
 
-api_client = ApiClient(host=settings.HOST_API)
+api_client = ApiClient.default()

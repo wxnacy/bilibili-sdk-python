@@ -16,7 +16,7 @@ pytest_plugins = ('pytest_asyncio',)
 
 member_client = get_member_client()
 
-@pytest.mark.asyncio(scope="session")
+@pytest.mark.asyncio(loop_scope="session")
 async def test_get_archive_list():
     req = GetArchiveListReq()
     res = await member_client.get_archive_list(req)

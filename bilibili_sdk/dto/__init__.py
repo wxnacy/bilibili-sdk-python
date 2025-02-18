@@ -5,6 +5,7 @@
 from .acc_info import GetAccInfoRes
 from .nav import GetWebInferfaceNavRes
 from .archive import GetArchiveListReq, GetArchiveListRes
+from .online import GetOnlineRes
 
 
 __all__ = [
@@ -12,4 +13,5 @@ __all__ = [
     'GetWebInferfaceNavRes',
     'GetArchiveListReq',
     'GetArchiveListRes',
+    'GetOnlineRes',
 ]
