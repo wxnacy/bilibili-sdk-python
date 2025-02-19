@@ -141,3 +141,20 @@ class ArchiveData(BaseModel):
 
 class GetArchiveListRes(BaseResponse):
     data: Optional[ArchiveData] = Field(default=None)
+
+
+class Video(BaseModel):
+    cid: int = Field(0, title="p1 id")
+    title: str = Field("", title="标题")
+    filename: str = Field("", title="猜测是md5")
+    desc: str = Field("", title="描述")
+    index: int = Field(0, title="")
+    duraction: int = Field(0, title="时长")
+
+
+class ArchiveVideoListData(BaseModel):
+    archive: Archive = Field(None)
+    videos: List[Video] = Field([])
+
+class GetArchiveVideoListRes(BaseResponse):
+    data: Optional[ArchiveVideoListData] = Field(default=None)

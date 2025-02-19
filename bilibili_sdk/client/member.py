@@ -29,6 +29,14 @@ class MemberClient(BaseClient):
             res_clz=dto.GetArchiveListRes
         )
 
+    async def get_archive_videos(self, aid: int) -> dto.GetArchiveVideoListRes:
+        '''获取稿件视频列表'''
+        return await self.get(
+            "/x/web/archive/videos",
+            params={"aid": aid},
+            res_clz=dto.GetArchiveVideoListRes
+        )
+
 
 
 member_client = MemberClient(host=settings.HOST_MEMBER)

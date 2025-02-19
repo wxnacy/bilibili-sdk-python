@@ -40,3 +40,12 @@ async def test_get_archive_list():
     assert archive.mid
     assert archive.aid
     assert archive.bvid
+
+@pytest.mark.asyncio(loop_scope="session")
+async def test_get_archive_video_list():
+    req = GetArchiveListReq()
+    res = await member_client.get_archive_videos(114019251853794)
+    assert res.is_success
+
+    videos = res.data.videos
+    assert len(videos) == 4

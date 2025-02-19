@@ -16,6 +16,7 @@ class ArchiveStatus(Enum):
 class ArchiveState(Enum):
     OPEN = EnumMem(0, '开放浏览')
     LOCKED = EnumMem(-4, '已锁定')
+    BACKED = EnumMem(-2, '已退回')
     UPDATED = EnumMem(-6, '修改审核')
     UNDER_REVIEW = EnumMem(30, '审核中')
-    WAITING = EnumMem(40, '审核通过，等待发布')
+    WAITING = EnumMem(-40, '审核通过，等待发布')
