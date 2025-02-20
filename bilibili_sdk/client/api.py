@@ -59,6 +59,13 @@ class ApiClient(BaseClient):
         '''
         return await self.get("/x/web-interface/nav", res_clz=dto.GetWebInferfaceNavRes)
 
+    def get_player_url(self, req: dto.GetPlayerUrlReq) -> dto.GetPlayerUrlRes:
+        '''获取视频播放地址
+        https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/video/videostream_url.md
+        '''
+        return self.get("/x/player/wbi/playurl", params=req, res_clz=dto.GetPlayerUrlRes)
+
+
 
 
 api_client = ApiClient.default()

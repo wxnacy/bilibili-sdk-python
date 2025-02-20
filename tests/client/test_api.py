@@ -3,7 +3,8 @@
 # Author:
 # Description:
 import pytest
-from bilibili_sdk import api_client, member_client
+from rich import print
+from bilibili_sdk import api_client, member_client, dto
 from tests.common import (
     get_cookies,
     get_cookies_info,
@@ -33,10 +34,23 @@ async def test_get_web_inferface_nav():
 
 @pytest.mark.asyncio(loop_scope="module")
 async def test_get_online():
-    info = get_cookies_info()
     res = await api_client.get_online(1313229659, aid = 365244281)
     assert res.is_success
 
     data = res.data
     assert data.total == "1"
     assert data.count == "1"
+
+@pytest.mark.asyncio(loop_scope="module")
+async def test_get_player_url():
+    req = dto.GetPlayerUrlReq(
+        cid=28441382320,
+        bvid='BV1SPwdevE1R',
+        fnval=16,
+    )
+    res: dto.GetPlayerUrlRes = await api_client.get_player_url(req)
+    assert res.is_success
+
+    data = res.data
+    assert len(data.support_formats) == len(data.accept_description)
+    print(data)
