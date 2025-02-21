@@ -59,11 +59,19 @@ class ApiClient(BaseClient):
         '''
         return await self.get("/x/web-interface/nav", res_clz=dto.GetWebInferfaceNavRes)
 
-    def get_player_url(self, req: dto.GetPlayerUrlReq) -> dto.GetPlayerUrlRes:
+    async def get_player_url(self, req: dto.GetPlayerUrlReq) -> dto.GetPlayerUrlRes:
         '''获取视频播放地址
         https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/video/videostream_url.md
         '''
-        return self.get("/x/player/wbi/playurl", params=req, res_clz=dto.GetPlayerUrlRes)
+        return await self.get("/x/player/wbi/playurl", params=req, res_clz=dto.GetPlayerUrlRes)
+
+    async def get_archive_info(self, *, bvid: str = None, aid: int = 0) -> dto.GetArchiveInfoRes:
+        '''获取稿件信息
+        https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/video/info.md
+        '''
+        params = {"bvid": bvid, "aid": aid}
+        return await self.get("/x/web-interface/wbi/view", params=params, res_clz=dto.GetArchiveInfoRes)
+
 
 
 

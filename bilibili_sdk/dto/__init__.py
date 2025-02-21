@@ -8,6 +8,7 @@ from .archive import (
     GetArchiveListReq,
     GetArchiveListRes,
     GetArchiveVideoListRes,
+    GetArchiveInfoRes,
 )
 from .video_stream import GetPlayerUrlReq, GetPlayerUrlRes
 from .online import GetOnlineRes
@@ -19,6 +20,7 @@ __all__ = [
     'GetArchiveListReq',
     'GetArchiveListRes',
     'GetArchiveVideoListRes',
+    'GetArchiveInfoRes',
     'GetOnlineRes',
     'GetPlayerUrlReq',
     'GetPlayerUrlRes',

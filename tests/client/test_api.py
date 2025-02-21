@@ -54,3 +54,13 @@ async def test_get_player_url():
     data = res.data
     assert len(data.support_formats) == len(data.accept_description)
     print(data)
+
+@pytest.mark.asyncio(loop_scope="module")
+async def test_get_archive_info():
+    bvid = 'BV1SPwdevE1R'
+    res: dto.GetArchiveInfoRes = await api_client.get_archive_info(bvid=bvid)
+    assert res.is_success
+
+    data = res.data
+    assert data.bvid == bvid
+    print(data)
