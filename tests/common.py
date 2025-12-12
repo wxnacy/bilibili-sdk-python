@@ -12,7 +12,7 @@ from bilibili_sdk import ApiClient, MemberClient
 from bilibili_sdk import api_client as _api_client
 from bilibili_sdk import member_client as _member_client
 
-COOKIES_PATH = os.path.expanduser("~/Downloads/bili_cli/config/xinxin-cookies.json")
+COOKIES_PATH = os.path.expanduser(os.getenv("TEST_BILIBILI_COOKIES_PATH"))
 
 
 def get_cookies_info():
