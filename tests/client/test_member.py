@@ -3,21 +3,16 @@
 # Author:
 # Description:
 import pytest
-from bilibili_sdk.dto import (
-    GetArchiveListReq,
-)
-from tests.common import (
-    get_cookies,
-    get_cookies_info,
-    get_member_client,
-)
 
-pytest_plugins = ('pytest_asyncio',)
+from bilibili_sdk import MemberClient
+from bilibili_sdk.dto import GetArchiveListReq
+from tests.common import member_client
 
-member_client = get_member_client()
+pytest_plugins = ("pytest_asyncio",)
+
 
 @pytest.mark.asyncio(loop_scope="session")
-async def test_get_archive_list():
+async def test_get_archive_list(member_client: MemberClient):
     req = GetArchiveListReq()
     res = await member_client.get_archive_list(req)
     assert res.is_success
@@ -41,8 +36,9 @@ async def test_get_archive_list():
     assert archive.aid
     assert archive.bvid
 
+
 @pytest.mark.asyncio(loop_scope="session")
-async def test_get_archive_video_list():
+async def test_get_archive_video_list(member_client: MemberClient):
     req = GetArchiveListReq()
     res = await member_client.get_archive_videos(114019251853794)
     assert res.is_success
